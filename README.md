@@ -5,7 +5,7 @@ Download the entire repository as a zip file and unpack or download folders for 
 ### Use
 
 $$
-\begin{align} \label{Dataset}
+\begin{align}
     \mathbf{X} = \begin{bmatrix}
         x_{11} & x_{12} & \dots & x_{1d}\\
         x_{21} & x_{22} & \dots & x_{2d}\\
