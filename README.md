@@ -3,7 +3,8 @@ This toolbox features different dimensionality reduction and classification func
 ### Installation
 Download the entire repository as a zip file and unpack or download folders for the relevant functions. Functions can either be added to the matlab paths via 'HOME -> Set Path -> Add with Subfolders' or they can be loaded inside any Matlab document using 'load('Path...\Machine-Learning-Custom-Toolbox')'
 ### Use
-Data must be provided in the format of an $$n\times d$$ data matix $$\mathbf{X}$$, where the $$n$$ rows corresponds to data points/experiments and the $$d$$ columns correspond to different features. Additionally, for supervised learners, the training class labels must be provided as a vector $$\mathbf{y}$$ with $$n$$ entries, all formatted as strings. 
+Data must be provided in the format of an $$n\times d$$ data matix $$\mathbf{X}$$, where the $$n$$ rows corresponds to data points/experiments and the $$d$$ columns correspond to different features. Additionally, for supervised learners, the training class labels must be provided as a vector $$\mathbf{y}$$ with $$n$$ entries, all formatted as strings.
+
 $$
 \begin{align}
     \mathbf{X} = \begin{bmatrix}
@@ -19,6 +20,7 @@ $$
     \end{bmatrix}
 \end{align}
 $$
+
 ## Dimensionality Reduction Methods
 ### PCA
 []
