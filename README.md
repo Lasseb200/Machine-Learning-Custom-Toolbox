@@ -24,7 +24,9 @@ $$
 ## Dimensionality Reduction Methods
 ### PCA
 Use:
+
 [v, lambda] = PCA(X)
+
 The function outputs the principal components $$v$$ and corresponding eigenvalues $$\lambda$$.
 
 ### LDA
