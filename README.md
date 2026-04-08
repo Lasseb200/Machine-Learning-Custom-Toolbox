@@ -22,16 +22,25 @@ $$
 $$
 
 ## Dimensionality Reduction Methods
-### PCA
+### Principal Component Analysis (PCA)
 [v, lambda] = PCA(X)
 
-The function outputs the principal components $$v$$ and corresponding eigenvalues $$\lambda$$.
+The function outputs the principal components $$v$$ and corresponding eigenvalues $$\lambda$$. The dataset can be projected along the principal components using 'X_proj = X*v'.
 
-### LDA
-### OLDA
+### Linear Discriminant Analysis (LDA)
+[v, lambda] = LDA(X_training, Y_training)
+
+The function outputs the discriminant vectors $$v$$ and the corresponding eigenvalues $$\lambda$$. The dataset can be projected along the discriminant vectors using 'X_proj = X*v'. Additionally, the function includes regularisation of the within-class scatter-matrix.
+
+### Orthogonal Linear Discriminant Analysis (OLDA)
+[v, lambda] = OLDA(X_training, Y_training, n)
+
+The function outputs the discriminant vectors $$v$$ and the corresponding eigenvalues $$\lambda$$. $$n$$ specifies the number of iterations/number of orthogonal discriminant vectors solved for. The dataset can be projected along the discriminant vectors using 'X_proj = X*v'. Additionally, the function includes regularisation of the within-class scatter-matrix.
 
 ## Classification Methods
 ### k-Means
+
+
 ### Naive-Bayes
 ### LDA (BLDA)
 ### QDA
