@@ -39,13 +39,33 @@ The function outputs the discriminant vectors $$v$$ and the corresponding eigenv
 
 ## Classification Methods
 ### k-Means (km)
-[Y_pred_idx, confidence] = km(X,k)
+[Y_pred_idx, c] = km(X,k)
 
-The function outouts an index $$Y_{\text{pred,idx}}$$ 
-    
+The function outouts a specific index $$\mathbf{Y}_{\text{pred,idx}}$$ for each data point corresponding to its predicted class. $$k$$ specifies the number of classes. Additionally, a confidence measure $$\mathbf{c}$$ of the classification being correct is provided.
 
 ### Naive-Bayes (NB)
+[Y_pred, c, P, class_labels] = NB(X_training,Y_training,X_test)
+
+The function outputs the predicted class label $$\mathbf{Y}_{\text{pred}}$$ for each test data point and the confidence in its classification $$\mathbf{c}$$. Additionally, the probability of other classes are included in the matrix $$\mathbf{P}$$, which columns corresponds to different classes. 'class_labels' contains the label for each column of $$\mathbf{P}$$.
+
 ### Bayesian Linear Discriminant Analysis (BLDA)
+[Y_pred, c, P, class_labels] = BLDA(X_training,Y_training,X_test)
+
+The function outputs the predicted class label $$\mathbf{Y}_{\text{pred}}$$ for each test data point and the confidence in its classification $$\mathbf{c}$$. Additionally, the probability of other classes are included in the matrix $$\mathbf{P}$$, which columns corresponds to different classes. 'class_labels' contains the label for each column of $$\mathbf{P}$$.
+
 ### Bayesian Quadratic Discriminant Analysis (QDA)
+[Y_pred, c, P, class_labels] = QDA(X_training,Y_training,X_test)
+
+The function outputs the predicted class label $$\mathbf{Y}_{\text{pred}}$$ for each test data point and the confidence in its classification $$\mathbf{c}$$. Additionally, the probability of other classes are included in the matrix $$\mathbf{P}$$, which columns corresponds to different classes. 'class_labels' contains the label for each column of $$\mathbf{P}$$.
+
 ### k-Nearest Neighbours (kNN)
+[Y_pred, c, P, class_labels] = kNN(X_training,Y_training,X_test,f)
+
+The function outputs the predicted class label $$\mathbf{Y}_{\text{pred}}$$ for each test data point and the confidence in its classification $$\mathbf{c}$$. $$f$$ specifies the number of nearest neighbours included. Additionally, the probability of other classes are included in the matrix $$\mathbf{P}$$, which columns corresponds to different classes. 'class_labels' contains the label for each column of $$\mathbf{P}$$.
+
 ### Support Vector Machine (SVM)
+[Y_pred, c, P, class_labels] = SVM(X_training,Y_training,X_test,C,kernelType,kernelInput,multiclassModel,executionMode)
+
+The function outputs the predicted class label $$\mathbf{Y}_{\text{pred}}$$ for each test data point and the confidence in its classification $$\mathbf{c}$$. Additionally, the probability of other classes are included in the matrix $$\mathbf{P}$$, which columns corresponds to different classes. 'class_labels' contains the label for each column of $$\mathbf{P}$$. Note that confidence and probability estimates require the "pairwiseCoupling" multiclass model.
+
+$$C$$ specifies the punishment for margin violations. A large $$C$$ punishes margin violations heavier, while a smaller $$C$$ allow for more violations. 'kernelType' specifies the type of kernel used. Polynomial "Poly", radial basis function "RBF" and sigmoid "sigmoid" kernels are built-in, but other kernels can be added in "SVM\private\kernel_types.m". 'multiclassModel' specifies the method used for multiclass SVM. The function supports one-versus-rest "1vR", one-versus-one with hard voting "hard1v1", one-versus-one with soft voting "soft1v1" and pairwise coupling "pairwiseCoupling". 'executionMode' specifies whether the function is executed on a single core "single" or with parallel processing "parallel".
