@@ -38,11 +38,14 @@ The function outputs the discriminant vectors $$v$$ and the corresponding eigenv
 The function outputs the discriminant vectors $$v$$ and the corresponding eigenvalues $$\lambda$$. $$n$$ specifies the number of iterations/number of orthogonal discriminant vectors solved for. The dataset can be projected along the discriminant vectors using 'X_proj = X*v'. Additionally, the function includes regularisation of the within-class scatter-matrix.
 
 ## Classification Methods
-### k-Means
+### k-Means (km)
+[Y_pred_idx, confidence] = km(X,k)
 
+The function outouts an index $$Y_{pred,idx}$$ 
+    
 
-### Naive-Bayes
-### LDA (BLDA)
-### QDA
-### k-NN
-### SVM
+### Naive-Bayes (NB)
+### Bayesian Linear Discriminant Analysis (BLDA)
+### Bayesian Quadratic Discriminant Analysis (QDA)
+### k-Nearest Neighbours (kNN)
+### Support Vector Machine (SVM)
