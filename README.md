@@ -41,7 +41,7 @@ The function outputs the discriminant vectors $$v$$ and the corresponding eigenv
 ### k-Means (km)
 [Y_pred_idx, confidence] = km(X,k)
 
-The function outouts an index $$Y_{pred,idx}$$ 
+The function outouts an index $$Y_{\text{pred,idx}}$$ 
     
 
 ### Naive-Bayes (NB)
