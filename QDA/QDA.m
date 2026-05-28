@@ -12,7 +12,12 @@ function [Y_pred, confidence, probabilities, class_labels] = QDA(X_training,Y_tr
         X_class = X_training(Ycat == Yu(j), :);
         n_j = size(X_class,1);
         W = (X_class-M(j,:))'*(X_class-M(j,:));
-        W = W + sqrt(eps)*eye(size(W));
+        %W = W + sqrt(eps)*eye(size(W));
+        %alpha = 0.75;
+        %alpha = 1e-4;
+        %alpha = 0.01;
+        alpha = 0.002+0.0001*d;
+        W = W + alpha * trace(W)/size(W,1) * eye(size(W));
         Sigma = W./(n_j-1);
 
         eg = eig(Sigma); 

@@ -2,7 +2,7 @@ function [alpha, b, K] = binary_SVM_training(X_training,Y_training,K_tot,C,idx_p
     g = 0;
     K = K_tot(idx_pair,idx_pair);
     H = (Y_training*Y_training').*K;
-    %H = H +sqrt(eps)*eye(size(H));
+    H = H + (1e-8)*eye(size(H));
     n = size(X_training,1);
     f = -ones(n,1);
     E = Y_training';
@@ -11,6 +11,9 @@ function [alpha, b, K] = binary_SVM_training(X_training,Y_training,K_tot,C,idx_p
     alpha = quadprog(H,f,[],[],E,g,alpha_min,alpha_max,[],opts);
     dynamic_thresh = max(alpha) * 0.001;
     sv_idx = find(alpha > dynamic_thresh & alpha < (C-dynamic_thresh));
+    if isempty(sv_idx)
+        [~, sv_idx] = max(alpha); 
+    end
     b = mean(Y_training(sv_idx) - ((alpha .* Y_training)' * K(:, sv_idx))');
 end
    

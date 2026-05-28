@@ -24,7 +24,7 @@ function [Y_pred, confidence,probabilities] = SVM_classifier(X_test,alpha,b,K_te
         pairs = nchoosek(1:k,2);
         F = zeros(n_test,nPairs);
         votes = zeros(size(X_test,1),k);
-    
+
         P = zeros(n_test, k, k);
         for p = 1:nPairs
             j = pairs(p,1); l = pairs(p,2);
@@ -33,24 +33,24 @@ function [Y_pred, confidence,probabilities] = SVM_classifier(X_test,alpha,b,K_te
             idx_pair = idx_j | idx_l;
             K_test = K_test_tot(idx_pair,:);
             F(:,p) = (alpha{p}.*y_allSet_cell{p})'*K_test + b(p);
-            
+
             if strcmpi(multiclassModel, 'hard1v1')
                 votes(:,j) = votes(:,j) + (F(:,p)>0);
                 votes(:,l) = votes(:,l) + (F(:,p)<0);
-    
+
             elseif strcmpi(multiclassModel, 'soft1v1')
                 P_pos = 1 ./ (1 + exp(A_Platt(p)*F(:,p) + B_Platt(p)));
                 P_neg = 1 - P_pos;
                 votes(:,j) = votes(:,j) + P_pos;
                 votes(:,l) = votes(:,l) + P_neg;
-    
+
             elseif strcmpi(multiclassModel, 'pairwiseCoupling')
                 P_pos = 1 ./ (1 + exp(A_Platt(p)*F(:,p) + B_Platt(p)));
                 P(:,j,l) = P_pos;
                 P(:,l,j) = 1 - P(:,j,l);
             end
         end
-    
+
         if strcmpi(multiclassModel, 'hard1v1') | strcmpi(multiclassModel, 'soft1v1')
             [~, idx_pred] = max(votes, [], 2);
             Y_pred = string(Yu(idx_pred));
@@ -58,7 +58,7 @@ function [Y_pred, confidence,probabilities] = SVM_classifier(X_test,alpha,b,K_te
             confidence = votes(sub2ind(size(votes), (1:n_test)', idx_pred)) ./ totalVotes;
             confidence = confidence/max(confidence);
             probabilities = NaN;
-    
+
         elseif strcmpi(multiclassModel, 'pairwiseCoupling') 
             confidence = zeros(n_test,1);
             Y_pred = strings(n_test,1);

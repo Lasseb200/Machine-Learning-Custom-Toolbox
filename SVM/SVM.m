@@ -14,8 +14,9 @@ function [Y_pred, confidence, probabilities, class_labels] = SVM(X_training,Y_tr
             parpool('Processes');
         end
     end
-    Yu = unique(Y_training,'stable');
-    R = Y_training==Yu';
+    Ycat = categorical(Y_training);
+    Yu = categories(Ycat);
+    R = string(Y_training)==string(Yu)';
 
     kernel = kernel_types(kernelType,kernelInput);
     K_tot = kernel(X_training,X_training);

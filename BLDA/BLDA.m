@@ -9,7 +9,14 @@ function [Y_pred, confidence, probabilities, class_labels] = BLDA(X_training,Y_t
     p = grpstats(X_training, Ycat, {'numel'}); p = p(:,1)./sum(p(:,1),1);
     P = ones(n_test,1)*p';
     W = (X_training-R*M)'*(X_training-R*M);
-    alpha = 1e-4;
+    %alpha = 1e-4;
+    %alpha = 0.75;
+    %alpha = 0.01;
+    d = size(X_training,2);
+    alpha = 0.002+0.0001*d;
+    W = W + alpha * trace(W)/size(W,1) * eye(size(W));
+    fprintf('alpha: %f, cond: %f\n', alpha, cond(W));
+
     W = W + alpha * trace(W)/size(W,1) * eye(size(W));
     Sigma = W./(n-k);
     Sigma_M = Sigma\M';

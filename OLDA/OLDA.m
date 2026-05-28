@@ -1,4 +1,4 @@
-function [v, lambda, B, W] = OLDA(X_training,Y_training,n)
+function [v, B, W] = OLDA(X_training,Y_training,n)
     Yu = unique(Y_training,'stable');
     R = Y_training==Yu';
     d = size(X_training,2);
@@ -10,12 +10,14 @@ function [v, lambda, B, W] = OLDA(X_training,Y_training,n)
     N = diag(n_class);
     B = D'*N*D;
     W = (X_training-R*M)'*(X_training-R*M);
-    cond(W)
-    %W = W + sqrt(eps)*eye(size(W));
-    alpha = 4e-1;   % or 1e-4 to 1e-2 
+    alpha = 0.002+0.0001*d;
+    %alpha = 4e-1;
+    %alpha = 0.05;
     W = W + alpha * trace(W)/size(W,1) * eye(size(W));
-    cond(W)
-    [v, lambda] = eigs(B,W,1);
+    fprintf('alpha: %f, cond: %f\n', alpha, cond(W));
+
+    W = W + alpha * trace(W)/size(W,1) * eye(size(W));
+    [v, ~] = eigs(B,W,1);
     W_inv_B = W\B;
     if n>1
         for i = 2:n

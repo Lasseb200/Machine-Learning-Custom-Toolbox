@@ -1,4 +1,4 @@
-function [Y_pred_idx, confidence, M, beta] = km(X,k)
+function [Y_pred_idx, confidence, M, beta, P] = km(X,k)
     n = size(X,1);
     d = size(X,2);
     idx = randperm(n,k);
